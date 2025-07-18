@@ -19,7 +19,5 @@ public class BuildingData
 
     [field: SerializeField] public int PowerCost { get; private set; }
 
-    [field: SerializeField] public int PowerGenerated { get; private set; }
-
     [field: SerializeField] public GameObject Prefab { get; private set; }
 }

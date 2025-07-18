@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlacementSystem : MonoBehaviour
@@ -21,6 +22,8 @@ public class PlacementSystem : MonoBehaviour
 
     private GameObject previewObject;
 
+    public static event Action onBuildingPlaced;
+
     private void Start()
     {
         StopPlacement();
@@ -35,6 +38,7 @@ public class PlacementSystem : MonoBehaviour
         Vector3 mousePos = inputManager.GetSelectedMapPosition();
         Vector3Int gridPos = grid.WorldToCell(mousePos);
         Vector3 snappedWorldPos = grid.CellToWorld(gridPos);
+        snappedWorldPos.y = inputManager.GetSelectedMapPosition().y;
 
         bool placementValidity = CheckPlacementValidity(gridPos, selectedObjectIndex);
 
@@ -56,7 +60,17 @@ public class PlacementSystem : MonoBehaviour
     public void StartPlacement(int index)
     {
         selectedObjectIndex = buildingDatabase.buildingData.FindIndex(data => data.ID == index);
+        
         if (selectedObjectIndex < 0) return;
+
+        if (buildingDatabase.buildingData[selectedObjectIndex].PowerCost > ResourceManager.Instance.availablePower)
+        { 
+            StopPlacement();
+            return; 
+        }
+
+        if (buildingDatabase.buildingData[selectedObjectIndex].Name == "Power Plant" 
+            && ResourceManager.Instance.currentPowerPlants == ResourceManager.Instance.maximumPowerPlants) return;
 
         previewObject = Instantiate(buildingDatabase.buildingData[selectedObjectIndex].Prefab);
         inputManager.OnClicked += PlaceStructure;
@@ -73,10 +87,21 @@ public class PlacementSystem : MonoBehaviour
         if (!CheckPlacementValidity(gridPos, selectedObjectIndex)) return;
 
         GameObject newObject = Instantiate(buildingDatabase.buildingData[selectedObjectIndex].Prefab);
-        newObject.transform.position = grid.CellToWorld(gridPos);
+        Vector3 placePosition = grid.CellToWorld(gridPos);
+        placePosition.y = inputManager.GetSelectedMapPosition().y;
+        newObject.transform.position = placePosition;
 
         objectData.AddObjectAt(gridPos, buildingDatabase.buildingData[selectedObjectIndex].Size, 
             buildingDatabase.buildingData[selectedObjectIndex].ID, selectedObjectIndex);
+
+        var powerGen = newObject.GetComponent<GeneratePower>();
+        if (powerGen != null)
+        {
+            powerGen.enabled = true;
+        }
+
+        ResourceManager.Instance.RemovePower(buildingDatabase.buildingData[selectedObjectIndex].PowerCost);
+        onBuildingPlaced?.Invoke();
 
         Destroy(previewObject);
     }
