@@ -32,4 +32,14 @@ public class InputManager : MonoBehaviour
 
         return lastPosition;
     }
+
+    public void RotateObjectClockwise(GameObject obj)
+    {
+        obj.transform.Rotate(0f, 90f, 0f);
+    }
+
+    public void RotateObjectAntiClockwise(GameObject obj)
+    {
+        obj.transform.Rotate(0f, -90f, 0f);
+    }
 }

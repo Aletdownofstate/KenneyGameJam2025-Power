@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlacementSystem : MonoBehaviour
@@ -21,6 +22,8 @@ public class PlacementSystem : MonoBehaviour
     [SerializeField] private Material invalidPlacementMaterial;
 
     private GameObject previewObject;
+
+    private List<GameObject> placedGameObjects = new();
 
     public static event Action onBuildingPlaced;
 
@@ -45,6 +48,10 @@ public class PlacementSystem : MonoBehaviour
         previewObject.transform.position = snappedWorldPos;
 
         SetPreviewMaterial(previewObject, placementValidity ? validPlacementMaterial : invalidPlacementMaterial);
+
+        if (Input.GetKeyDown(KeyCode.E)) inputManager.RotateObjectClockwise(previewObject);
+
+        if (Input.GetKeyDown(KeyCode.Q)) inputManager.RotateObjectAntiClockwise(previewObject);
     }
 
     private void StopPlacement()
@@ -90,8 +97,10 @@ public class PlacementSystem : MonoBehaviour
         Vector3 placePosition = grid.CellToWorld(gridPos);
         placePosition.y = inputManager.GetSelectedMapPosition().y;
         newObject.transform.position = placePosition;
+        
+        newObject.transform.rotation = previewObject.transform.rotation;
 
-        objectData.AddObjectAt(gridPos, buildingDatabase.buildingData[selectedObjectIndex].Size, 
+        objectData.AddObjectAt(gridPos, buildingDatabase.buildingData[selectedObjectIndex].Size,
             buildingDatabase.buildingData[selectedObjectIndex].ID, selectedObjectIndex);
 
         var powerGen = newObject.GetComponent<GeneratePower>();
@@ -101,10 +110,11 @@ public class PlacementSystem : MonoBehaviour
         }
 
         ResourceManager.Instance.RemovePower(buildingDatabase.buildingData[selectedObjectIndex].PowerCost);
-        onBuildingPlaced?.Invoke();
+        onBuildingPlaced?.Invoke();       
 
         Destroy(previewObject);
     }
+
 
     private bool CheckPlacementValidity(Vector3Int gridPos, int selectedObjectIndex)
     {
