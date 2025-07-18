@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlacementSystem : MonoBehaviour
@@ -23,9 +22,7 @@ public class PlacementSystem : MonoBehaviour
 
     private GameObject previewObject;
 
-    private List<GameObject> placedGameObjects = new();
-
-    public static event Action onBuildingPlaced;
+    public static event Action onBuildingPlaced, onEscPressed;
 
     private void Start()
     {
@@ -36,6 +33,8 @@ public class PlacementSystem : MonoBehaviour
 
     private void Update()
     {
+        if (previewObject == null && Input.GetKeyDown(KeyCode.Escape)) onEscPressed?.Invoke();
+
         if (selectedObjectIndex < 0 || previewObject == null) return;
 
         Vector3 mousePos = inputManager.GetSelectedMapPosition();
@@ -113,8 +112,9 @@ public class PlacementSystem : MonoBehaviour
         onBuildingPlaced?.Invoke();       
 
         Destroy(previewObject);
-    }
 
+        StopPlacement();
+    }
 
     private bool CheckPlacementValidity(Vector3Int gridPos, int selectedObjectIndex)
     {

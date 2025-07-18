@@ -15,14 +15,14 @@ MonoBehaviour:
   buildingData:
   - <ID>k__BackingField: 0
     <Name>k__BackingField: Power Plant
-    <Size>k__BackingField: {x: 1, y: 1}
+    <Size>k__BackingField: {x: 2, y: 2}
     <PowerCost>k__BackingField: 1
     <Prefab>k__BackingField: {fileID: 8676789269901247333, guid: e70f0d3702fa216458fdc58fa373a74e, type: 3}
   - <ID>k__BackingField: 1
-    <Name>k__BackingField: Road
-    <Size>k__BackingField: {x: 1, y: 1}
-    <PowerCost>k__BackingField: 0
-    <Prefab>k__BackingField: {fileID: 8258520421268717120, guid: e819b6d15c5d28547a33817c59f3ba01, type: 3}
+    <Name>k__BackingField: Apartment
+    <Size>k__BackingField: {x: 2, y: 2}
+    <PowerCost>k__BackingField: 1
+    <Prefab>k__BackingField: {fileID: 293912359989107180, guid: ddbfeec6db2780f459d52eb94a022988, type: 3}
   - <ID>k__BackingField: 2
     <Name>k__BackingField: Road Bend
     <Size>k__BackingField: {x: 1, y: 1}
