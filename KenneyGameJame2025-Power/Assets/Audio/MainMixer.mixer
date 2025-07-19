@@ -81,10 +81,27 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: -2714467896680119765}
+  - {fileID: -1597470321699998789}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
+--- !u!244 &-1597470321699998789
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 25a0535db2b2d8242a968a7ee2d242fd
+  m_EffectName: Lowpass Simple
+  m_MixLevel: e9f806f76f8b81b4bb7666fbdb94b5e8
+  m_Parameters:
+  - m_ParameterName: Cutoff freq
+    m_GUID: 6bc24d90ec52bff459faf54584029f1f
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!241 &24100000
 AudioMixerController:
   m_ObjectHideFlags: 0
@@ -105,6 +122,8 @@ AudioMixerController:
     name: masterVolume
   - guid: f461087a3e13bb348bf52009aa786742
     name: musicVolume
+  - guid: 6bc24d90ec52bff459faf54584029f1f
+    name: musicLpf
   - guid: 273be930eb716db44bd51dd98f95011b
     name: sfxVolume
   - guid: 91485ab0069f063429ff8a6e8dd92238
@@ -164,6 +183,8 @@ AudioMixerSnapshotController:
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: 69b9379083a5eca46a86ea7b87d4994f
   m_FloatValues:
+    6bc24d90ec52bff459faf54584029f1f: 22000
+    658fe698cf53ef348b68be0a6c2cd482: 400
     f461087a3e13bb348bf52009aa786742: 0
     3001848f68570954ab196b3851983f42: 0
   m_TransitionOverrides: {}

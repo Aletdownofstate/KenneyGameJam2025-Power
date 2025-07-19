@@ -240,4 +240,9 @@ public class OptionsManager : MonoBehaviour
 
         Debug.Log("Volume options reset");
     }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }

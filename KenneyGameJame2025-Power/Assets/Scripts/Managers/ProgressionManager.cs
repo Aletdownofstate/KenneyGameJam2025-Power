@@ -3,7 +3,13 @@ using UnityEngine;
 
 public class ProgressionManager : MonoBehaviour
 {
-    [SerializeField] private GameObject powerPlantBtn, apartmentBtn, shopBtn, parkBtn, houseBtn;
+    [Header("Buttons")]
+    [SerializeField] private GameObject powerPlantBtn;
+    [SerializeField] private GameObject apartmentBtn;
+    [SerializeField] private GameObject shopBtn;
+    [SerializeField] private GameObject parkBtn;
+    [SerializeField] private GameObject houseBtn;
+
     private List<GameObject> buttons;
 
     private void Start()

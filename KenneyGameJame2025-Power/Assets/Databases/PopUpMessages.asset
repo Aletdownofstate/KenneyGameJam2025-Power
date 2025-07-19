@@ -21,3 +21,5 @@ MonoBehaviour:
       has been unlocked.\n\nParks increase mood when near apartments.
   - <PopUpText>k__BackingField: You've hit a population milestone!\n\nA new building
       has been unlocked.\n\nHouses cost more power, but increase mood more.
+  - <PopUpText>k__BackingField: Power is required for all buildings!\n\nClick the
+      lightning bolts as they appear to get more power.

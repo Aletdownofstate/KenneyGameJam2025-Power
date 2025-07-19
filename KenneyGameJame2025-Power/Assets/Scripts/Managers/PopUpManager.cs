@@ -32,6 +32,8 @@ public class PopUpManager : MonoBehaviour
         PopulationManager.onFirstBuildingMilestone += () => ShowTextPopUp(1);
         PopulationManager.onSecondBuildingMilestone += () => ShowTextPopUp(2);
         PopulationManager.onThirdBuildingMilestone += () => ShowTextPopUp(3);
+
+        GeneratePower.onPowerPlantPlaced += () => ShowTextPopUp(4);
     }    
 
     public void ShowTextPopUp(int index)

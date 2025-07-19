@@ -1,8 +1,12 @@
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance { get; private set; }
+
+    [Header("Mixer")]
+    [SerializeField] private AudioMixer mainMixer;
 
     [Header("Audio Sources")]
     [SerializeField] private AudioSource sfxAudioSrc;
@@ -15,6 +19,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip birdsSfx;
     [SerializeField] private AudioClip cashSfx;
     [SerializeField] private AudioClip popUpSfx;
+
+    private int cutOffFrequency = 200;
 
     private void Awake()
     {
@@ -94,5 +100,15 @@ public class AudioManager : MonoBehaviour
     public void PlaySfx(AudioClip clip)
     {
         sfxAudioSrc.PlayOneShot(clip);
+    }
+
+    public void ApplyLowPassFilter()
+    {
+        mainMixer.SetFloat("musicLpf", cutOffFrequency);
+    }
+
+    public void BypassLowPassFilter()
+    {
+        mainMixer.SetFloat("musicLpf", 22000);
     }
 }

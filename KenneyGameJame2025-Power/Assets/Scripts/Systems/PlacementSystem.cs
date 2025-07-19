@@ -7,8 +7,7 @@ public class PlacementSystem : MonoBehaviour
     [SerializeField] private InputManager inputManager;
 
     [Header("Grid Settings")]
-    [SerializeField] private Grid grid;
-    [SerializeField] private LayerMask roadLayerMask;
+    [SerializeField] private Grid grid;    
 
     private GridData objectData;
 

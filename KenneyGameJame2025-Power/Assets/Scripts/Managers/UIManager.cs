@@ -4,7 +4,13 @@ using System.Collections.Generic;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI availablePowerText, maxPowerPlantsText, populationText, publicMoodText;
+    [Header("Text")]
+    [SerializeField] private TextMeshProUGUI availablePowerText;
+    [SerializeField] private TextMeshProUGUI maxPowerPlantsText;
+    [SerializeField] private TextMeshProUGUI populationText;
+    [SerializeField] private TextMeshProUGUI publicMoodText;
+
+    [Header("Options")]
     [SerializeField] GameObject optionsScreen;
     [SerializeField] GameObject buttons, text, meters, images;
 
@@ -85,6 +91,8 @@ public class UIManager : MonoBehaviour
                 element.SetActive(false);
             }
 
+            AudioManager.Instance.ApplyLowPassFilter();
+
             optionsScreen.SetActive(true);
             Time.timeScale = 0;
         }
@@ -94,6 +102,8 @@ public class UIManager : MonoBehaviour
             {
                 element.SetActive(true);
             }
+
+            AudioManager.Instance.BypassLowPassFilter();
 
             optionsScreen.SetActive(false);
             Time.timeScale = 1;
