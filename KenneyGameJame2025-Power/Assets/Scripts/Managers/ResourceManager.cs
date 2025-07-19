@@ -23,11 +23,13 @@ public class ResourceManager : MonoBehaviour
     private void OnEnable()
     {
         GeneratePower.onPowerPlantPlacement += AddPowerPlant;
+        PopulationManager.onPopulationMilestone += IncreaseAvailablePowerPlants;
     }
 
     private void OnDisable()
     {
         GeneratePower.onPowerPlantPlacement -= AddPowerPlant;
+        PopulationManager.onPopulationMilestone -= IncreaseAvailablePowerPlants;
     }
 
     public void AddPower(int amount)
@@ -43,5 +45,10 @@ public class ResourceManager : MonoBehaviour
     public void AddPowerPlant()
     {
         currentPowerPlants++;
+    }
+
+    public void IncreaseAvailablePowerPlants()
+    {
+        maximumPowerPlants++;
     }
 }

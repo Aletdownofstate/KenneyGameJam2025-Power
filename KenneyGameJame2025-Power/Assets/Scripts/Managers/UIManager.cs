@@ -18,8 +18,11 @@ public class UIManager : MonoBehaviour
     {
         GeneratePower.onPowerIncrease += UpdateAvailablePower;
         GeneratePower.onPowerPlantPlacement += UpdateAvailablePowerPlants;
+        PopulationManager.onPopulationMilestone += UpdateAvailablePowerPlants;
         PlacementSystem.onBuildingPlaced += UpdateAvailablePower;
+
         AddPopulationOnPlace.onPopulationIncrease += UpdatePopulation;
+
         MoodManager.onMoodChange += UpdateMood;
 
         PlacementSystem.onEscPressed += ShowOptions;
@@ -29,8 +32,11 @@ public class UIManager : MonoBehaviour
     {
         GeneratePower.onPowerIncrease -= UpdateAvailablePower;
         GeneratePower.onPowerPlantPlacement -= UpdateAvailablePowerPlants;
+        PopulationManager.onPopulationMilestone -= UpdateAvailablePowerPlants;
         PlacementSystem.onBuildingPlaced -= UpdateAvailablePower;
+
         AddPopulationOnPlace.onPopulationIncrease -= UpdatePopulation;
+
         MoodManager.onMoodChange -= UpdateMood;
 
         PlacementSystem.onEscPressed -= ShowOptions;

@@ -29,6 +29,16 @@ public class MoodManager : MonoBehaviour
         UpdateMoodLevel();
     }
 
+    private void OnEnable()
+    {
+        onMoodChange += MoodChanges;
+    }
+
+    private void OnDisable()
+    {
+        onMoodChange -= MoodChanges;
+    }
+
     public void IncreaseMood(int amount)
     {
         moodValue += amount;
@@ -43,27 +53,41 @@ public class MoodManager : MonoBehaviour
 
     private void UpdateMoodLevel()
     {
-        if (moodValue <= -10)
-        {
-            currentMood = Mood.VeryUnhappy;
-        }
-        else if (moodValue < 0)
-        {
-            currentMood = Mood.Unhappy;
-        }
-        else if (moodValue == 0)
-        {
-            currentMood = Mood.Neutral;
-        }
-        else if (moodValue < 10)
-        {
-            currentMood = Mood.Happy;
-        }
-        else
-        {
-            currentMood = Mood.VeryHappy;
-        }
+        if (moodValue <= -10) currentMood = Mood.VeryUnhappy;        
+        
+        else if (moodValue < 0) currentMood = Mood.Unhappy;
+
+        else if (moodValue == 0) currentMood = Mood.Neutral;
+
+        else if (moodValue < 10) currentMood = Mood.Happy;
+
+        else currentMood = Mood.VeryHappy;
 
         onMoodChange?.Invoke();
+    }
+
+    private void MoodChanges()
+    {
+        switch (currentMood)
+        {
+            case Mood.VeryUnhappy:
+                PopulationManager.Instance.RemoveRandomPopulation(150);
+                break;
+
+            case Mood.Unhappy:
+                PopulationManager.Instance.RemoveRandomPopulation(100);
+                break;
+
+            case Mood.Neutral:
+                break;
+
+            case Mood.Happy:
+                PopulationManager.Instance.AddRandomPopulation(50);
+                break;
+
+            case Mood.VeryHappy:
+                PopulationManager.Instance.AddRandomPopulation(150);
+                break;
+        }
     }
 }

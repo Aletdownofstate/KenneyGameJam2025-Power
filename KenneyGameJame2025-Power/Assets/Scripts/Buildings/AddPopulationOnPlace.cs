@@ -7,7 +7,7 @@ public class AddPopulationOnPlace : MonoBehaviour
 
     private void Start()
     {
-        PopulationManager.Instance.AddRandomPopulation();
+        PopulationManager.Instance.AddRandomPopulation(100);
 
         onPopulationIncrease?.Invoke();
     }
