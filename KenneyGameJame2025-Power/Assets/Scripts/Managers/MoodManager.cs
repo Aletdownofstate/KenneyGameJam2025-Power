@@ -8,7 +8,7 @@ public class MoodManager : MonoBehaviour
     public enum Mood { VeryUnhappy, Unhappy, Neutral, Happy, VeryHappy }
     public Mood currentMood;
 
-    private int moodValue;
+    public int moodValue;
 
     public static event Action onMoodChange;
 
@@ -55,13 +55,13 @@ public class MoodManager : MonoBehaviour
     {
         if (moodValue <= -10) currentMood = Mood.VeryUnhappy;        
         
-        else if (moodValue < 0) currentMood = Mood.Unhappy;
+        else if (moodValue <= -5) currentMood = Mood.Unhappy;
 
-        else if (moodValue == 0) currentMood = Mood.Neutral;
+        else if (moodValue > -4 && moodValue < 4) currentMood = Mood.Neutral;
 
-        else if (moodValue < 10) currentMood = Mood.Happy;
+        else if (moodValue >= 5 && moodValue < 10) currentMood = Mood.Happy;
 
-        else currentMood = Mood.VeryHappy;
+        else if (moodValue >= 10) currentMood = Mood.VeryHappy;
 
         onMoodChange?.Invoke();
     }

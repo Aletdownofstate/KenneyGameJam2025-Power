@@ -17,13 +17,15 @@ public class UIManager : MonoBehaviour
     private void OnEnable()
     {
         GeneratePower.onPowerIncrease += UpdateAvailablePower;
-        GeneratePower.onPowerPlantPlacement += UpdateAvailablePowerPlants;
+        GeneratePower.onPowerPlantPlaced += UpdateAvailablePowerPlants;
         PopulationManager.onPopulationMilestone += UpdateAvailablePowerPlants;
         PlacementSystem.onBuildingPlaced += UpdateAvailablePower;
 
-        AddPopulationOnPlace.onPopulationIncrease += UpdatePopulation;
+        OnApartmentPlacement.onApartmentPlaced += UpdatePopulation;
 
         MoodManager.onMoodChange += UpdateMood;
+        GeneratePower.onPowerPlantPlaced += UpdateMood;
+        OnParkPlacement.onParkPlaced += UpdateMood;
 
         PlacementSystem.onEscPressed += ShowOptions;
     }
@@ -31,13 +33,15 @@ public class UIManager : MonoBehaviour
     private void OnDisable()
     {
         GeneratePower.onPowerIncrease -= UpdateAvailablePower;
-        GeneratePower.onPowerPlantPlacement -= UpdateAvailablePowerPlants;
+        GeneratePower.onPowerPlantPlaced -= UpdateAvailablePowerPlants;
         PopulationManager.onPopulationMilestone -= UpdateAvailablePowerPlants;
         PlacementSystem.onBuildingPlaced -= UpdateAvailablePower;
 
-        AddPopulationOnPlace.onPopulationIncrease -= UpdatePopulation;
+        OnApartmentPlacement.onApartmentPlaced -= UpdatePopulation;
 
         MoodManager.onMoodChange -= UpdateMood;
+        GeneratePower.onPowerPlantPlaced -= UpdateMood;
+        OnParkPlacement.onParkPlaced -= UpdateMood;
 
         PlacementSystem.onEscPressed -= ShowOptions;
     }

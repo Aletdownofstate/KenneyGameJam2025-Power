@@ -161,10 +161,20 @@ public class PlacementSystem : MonoBehaviour
                 break;
 
             case 2: // Apartment
-                var addPopulation = newObject.GetComponent<AddPopulationOnPlace>();
+                var addPopulation = newObject.GetComponent<OnApartmentPlacement>();
                 if (addPopulation != null)
                 {
                     addPopulation.enabled = true;
+                }
+
+                ResourceManager.Instance.RemovePower(buildingDatabase.buildingData[selectedObjectIndex].PowerCost);
+                break;
+
+            case 3: // Park
+                var addMood = newObject.GetComponent<OnParkPlacement>();
+                if (addMood != null)
+                {
+                    addMood.enabled = true;
                 }
 
                 ResourceManager.Instance.RemovePower(buildingDatabase.buildingData[selectedObjectIndex].PowerCost);

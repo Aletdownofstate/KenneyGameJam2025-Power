@@ -13,14 +13,15 @@ public class GeneratePower : MonoBehaviour
     private bool isReadyToHarvest = false;
 
     public static event Action onPowerIncrease;
-    public static event Action onPowerPlantPlacement;
+    public static event Action onPowerPlantPlaced;
     public static event Action onPowerCollect;
 
     private void Start()
     {
-        onPowerPlantPlacement?.Invoke();
-
         IncreasePower();
+        MoodManager.Instance.DecreaseMood(5);
+
+        onPowerPlantPlaced?.Invoke();
 
         StartCoroutine(PowerCycle());
     }

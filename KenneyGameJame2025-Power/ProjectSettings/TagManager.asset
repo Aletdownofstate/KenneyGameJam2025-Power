@@ -7,6 +7,8 @@ TagManager:
   - SFXAudioSrc
   - BGMAudioSrc
   - Options
+  - Apartment
+  - PowerPlant
   layers:
   - Default
   - TransparentFX

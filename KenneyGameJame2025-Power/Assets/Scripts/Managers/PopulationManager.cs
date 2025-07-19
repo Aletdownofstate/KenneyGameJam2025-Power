@@ -7,11 +7,17 @@ public class PopulationManager : MonoBehaviour
 
     public float currentPopulation;
 
-    private bool firstMilestone = false;
-    private bool secondMilestone = false;
-    private bool thirdMilestone = false;
+    private bool firstPowerMilestone = false;
+    private bool secondPowerMilestone = false;
+    private bool thirdPowerMilestone = false;
+
+    private bool firstBuidingMilestone = false;
+    private bool secondBuidingMilestone = false;
+    private bool thirdBuildingMilestone = false;
 
     public static event Action onPopulationMilestone;
+    public static event Action onFirstBuildingMilestone;
+    public static event Action ontBuildingMilestone, onSecondBuildingMilestone, onThirdBuildingMilestone;
 
     private void Awake()
     {
@@ -29,32 +35,56 @@ public class PopulationManager : MonoBehaviour
     {
         currentPopulation += UnityEngine.Random.Range(10, max);
 
-        PopulationMilestones();
+        PopulationPowerMilestones();
+        PopulationBuildingMilestones();
     }
 
     public void RemoveRandomPopulation(int max)
     {
         currentPopulation -= UnityEngine.Random.Range(10, max);
+
+        if (currentPopulation < 0) currentPopulation = 0;        
     }
 
-    private void PopulationMilestones()
+    private void PopulationPowerMilestones()
     {
-        if (currentPopulation >= 500 && !firstMilestone)
+        if (currentPopulation >= 500 && !firstPowerMilestone)
         {
-            firstMilestone = true;
+            firstPowerMilestone = true;
             onPopulationMilestone?.Invoke();
         }
 
-        if (currentPopulation >= 1000 && !secondMilestone)
+        if (currentPopulation >= 1000 && !secondPowerMilestone)
         {
-            secondMilestone = true;
+            secondPowerMilestone = true;
             onPopulationMilestone?.Invoke();
         }
 
-        if (currentPopulation >= 2500 && !thirdMilestone)
+        if (currentPopulation >= 2500 && !thirdPowerMilestone)
         {
-            thirdMilestone = true;
+            thirdPowerMilestone = true;
             onPopulationMilestone?.Invoke();
+        }
+    }
+
+    private void PopulationBuildingMilestones()
+    {
+        if (currentPopulation >= 100 && !firstBuidingMilestone)
+        {
+            firstBuidingMilestone = true;
+            onFirstBuildingMilestone?.Invoke();
+        }
+
+        if (currentPopulation >= 250 && !secondBuidingMilestone)
+        {
+            secondBuidingMilestone = true;
+            onSecondBuildingMilestone?.Invoke();
+        }
+
+        if (currentPopulation >= 500 && !thirdBuildingMilestone)
+        {
+            thirdBuildingMilestone = true;
+            onThirdBuildingMilestone?.Invoke();
         }
     }
 }
