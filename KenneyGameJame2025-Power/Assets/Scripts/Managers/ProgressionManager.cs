@@ -3,12 +3,12 @@ using UnityEngine;
 
 public class ProgressionManager : MonoBehaviour
 {
-    [SerializeField] private GameObject powerPlantBtn, apartmentBtn, shopBtn, parkBtn;
+    [SerializeField] private GameObject powerPlantBtn, apartmentBtn, shopBtn, parkBtn, houseBtn;
     private List<GameObject> buttons;
 
     private void Start()
     {
-        buttons = new List<GameObject> { powerPlantBtn, apartmentBtn, shopBtn, parkBtn };
+        buttons = new List<GameObject> { powerPlantBtn, apartmentBtn, shopBtn, parkBtn, houseBtn };
 
         foreach (var button in buttons)
         {
@@ -26,6 +26,7 @@ public class ProgressionManager : MonoBehaviour
         PlacementSystem.onPowerPlantPlaced += ActivateApartmentButton;
         PopulationManager.onFirstBuildingMilestone += ActivateShopBtn;
         PopulationManager.onSecondBuildingMilestone += ActivateParkBtn;
+        PopulationManager.onThirdBuildingMilestone += ActivateHouseBtn;
     }
 
     private void OnDisable()
@@ -33,6 +34,7 @@ public class ProgressionManager : MonoBehaviour
         PlacementSystem.onPowerPlantPlaced -= ActivateApartmentButton;
         PopulationManager.onFirstBuildingMilestone -= ActivateShopBtn;
         PopulationManager.onSecondBuildingMilestone -= ActivateParkBtn;
+        PopulationManager.onThirdBuildingMilestone -= ActivateHouseBtn;
     }
 
     private void ActivateApartmentButton()
@@ -48,5 +50,10 @@ public class ProgressionManager : MonoBehaviour
     private void ActivateParkBtn()
     {
         if (!parkBtn.activeInHierarchy) parkBtn.SetActive(true);
+    }
+
+    private void ActivateHouseBtn()
+    {
+        if (!houseBtn.activeInHierarchy) houseBtn.SetActive(true);
     }
 }

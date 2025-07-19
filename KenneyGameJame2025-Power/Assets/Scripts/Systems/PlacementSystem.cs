@@ -172,7 +172,9 @@ public class PlacementSystem : MonoBehaviour
     {
         switch (index)
         {
-            case 0: // Power Plant
+            // Power Plant
+
+            case 0:
                 var powerGen = newObject.GetComponent<GeneratePower>();
 
                 if (powerGen != null)
@@ -185,7 +187,9 @@ public class PlacementSystem : MonoBehaviour
                 onPowerPlantPlaced?.Invoke();
                 break;
 
-            case 1: // Shop
+            // Shop
+
+            case 1:
                 var shop = newObject.GetComponent<OnShopPlacement>();
 
                 if (shop != null)
@@ -196,18 +200,22 @@ public class PlacementSystem : MonoBehaviour
                 ResourceManager.Instance.RemovePower(buildingDatabase.buildingData[selectedObjectIndex].PowerCost);
                 break;
 
-            case 2: // Apartment
-                var addPopulation = newObject.GetComponent<OnApartmentPlacement>();
+            // Apartment
 
-                if (addPopulation != null)
+            case 2: 
+                var addApartmentPopulation = newObject.GetComponent<OnApartmentPlacement>();
+
+                if (addApartmentPopulation != null)
                 {
-                    addPopulation.enabled = true;
+                    addApartmentPopulation.enabled = true;
                 }
 
                 ResourceManager.Instance.RemovePower(buildingDatabase.buildingData[selectedObjectIndex].PowerCost);
                 break;
 
-            case 3: // Park
+            // Park
+
+            case 3:
                 var addMood = newObject.GetComponent<OnParkPlacement>();
 
                 if (addMood != null)
@@ -218,7 +226,17 @@ public class PlacementSystem : MonoBehaviour
                 ResourceManager.Instance.RemovePower(buildingDatabase.buildingData[selectedObjectIndex].PowerCost);
                 break;
 
-            case 4: // House - does nothing currently
+            // House
+
+            case 4: 
+                var addHousePopulation = newObject.GetComponent<OnHousePlacement>();
+
+                if (addHousePopulation != null)
+                {
+                    addHousePopulation.enabled = true;
+                }
+
+                ResourceManager.Instance.RemovePower(buildingDatabase.buildingData[selectedObjectIndex].PowerCost);
                 break;
         }
     }

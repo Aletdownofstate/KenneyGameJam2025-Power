@@ -7,7 +7,12 @@ public class GameManager : MonoBehaviour
     {
         StartCoroutine(InitialiseOptions());
     }
-    
+
+    private void Start()
+    {
+        
+    }
+
     private IEnumerator InitialiseOptions()
     {
         GameObject optionsManager = GameObject.FindGameObjectWithTag("Options");

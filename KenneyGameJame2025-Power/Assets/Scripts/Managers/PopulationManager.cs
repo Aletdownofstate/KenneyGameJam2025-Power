@@ -16,8 +16,7 @@ public class PopulationManager : MonoBehaviour
     private bool thirdBuildingMilestone = false;
 
     public static event Action onPopulationMilestone;
-    public static event Action onFirstBuildingMilestone;
-    public static event Action ontBuildingMilestone, onSecondBuildingMilestone, onThirdBuildingMilestone;
+    public static event Action onFirstBuildingMilestone, onSecondBuildingMilestone, onThirdBuildingMilestone;    
 
     private void Awake()
     {

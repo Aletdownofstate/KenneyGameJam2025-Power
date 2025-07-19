@@ -28,12 +28,12 @@ public class UIManager : MonoBehaviour
         PlacementSystem.onBuildingPlaced += UpdateAvailablePower;
 
         OnApartmentPlacement.onApartmentPlaced += UpdatePopulation;
-        OnHousePlacement.onHousePlacement += UpdatePopulation;
+        OnHousePlacement.onHousePlaced += UpdatePopulation;
 
         MoodManager.onMoodChange += UpdateMood;
         GeneratePower.onPowerPlantPlaced += UpdateMood;
         OnParkPlacement.onParkPlaced += UpdateMood;
-        OnHousePlacement.onHousePlacement += UpdateMood;
+        OnHousePlacement.onHousePlaced += UpdateMood;
 
         PlacementSystem.onEscPressed += ShowOptions;
     }
@@ -46,12 +46,12 @@ public class UIManager : MonoBehaviour
         PlacementSystem.onBuildingPlaced -= UpdateAvailablePower;
 
         OnApartmentPlacement.onApartmentPlaced -= UpdatePopulation;
-        OnHousePlacement.onHousePlacement -= UpdatePopulation;
+        OnHousePlacement.onHousePlaced -= UpdatePopulation;
 
         MoodManager.onMoodChange -= UpdateMood;
         GeneratePower.onPowerPlantPlaced -= UpdateMood;
         OnParkPlacement.onParkPlaced -= UpdateMood;
-        OnHousePlacement.onHousePlacement -= UpdateMood;
+        OnHousePlacement.onHousePlaced -= UpdateMood;
 
         PlacementSystem.onEscPressed -= ShowOptions;
     }
