@@ -151,6 +151,7 @@ public class PlacementSystem : MonoBehaviour
         {
             case 0: // Power Plant
                 var powerGen = newObject.GetComponent<GeneratePower>();
+
                 if (powerGen != null)
                 {
                     powerGen.enabled = true;
@@ -161,11 +162,20 @@ public class PlacementSystem : MonoBehaviour
                 onPowerPlantPlaced?.Invoke();
                 break;
 
-            case 1: // Shop - nothing currently                
+            case 1: // Shop
+                var shop = newObject.GetComponent<OnShopPlacement>();
+
+                if (shop != null)
+                {
+                    shop.enabled = true;
+                }
+
+                ResourceManager.Instance.RemovePower(buildingDatabase.buildingData[selectedObjectIndex].PowerCost);
                 break;
 
             case 2: // Apartment
                 var addPopulation = newObject.GetComponent<OnApartmentPlacement>();
+
                 if (addPopulation != null)
                 {
                     addPopulation.enabled = true;
@@ -176,6 +186,7 @@ public class PlacementSystem : MonoBehaviour
 
             case 3: // Park
                 var addMood = newObject.GetComponent<OnParkPlacement>();
+
                 if (addMood != null)
                 {
                     addMood.enabled = true;
@@ -183,7 +194,6 @@ public class PlacementSystem : MonoBehaviour
 
                 ResourceManager.Instance.RemovePower(buildingDatabase.buildingData[selectedObjectIndex].PowerCost);
                 break;
-
         }
     }
 

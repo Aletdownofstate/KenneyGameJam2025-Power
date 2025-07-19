@@ -13,6 +13,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip thudSfx;
     [SerializeField] private AudioClip popSfx;
     [SerializeField] private AudioClip birdsSfx;
+    [SerializeField] private AudioClip cashSfx;
 
     private void Awake()
     {
@@ -39,6 +40,8 @@ public class AudioManager : MonoBehaviour
         GeneratePower.onPowerCollect += OnPowerCollected;
 
         OnParkPlacement.onParkPlaced += OnParkPlaced;
+
+        OnShopPlacement.onShopPlaced += OnShopPlaced;
     }
 
     private void OnDisable()
@@ -49,6 +52,8 @@ public class AudioManager : MonoBehaviour
         GeneratePower.onPowerCollect -= OnPowerCollected;
 
         OnParkPlacement.onParkPlaced -= OnParkPlaced;
+
+        OnShopPlacement.onShopPlaced -= OnShopPlaced;
     }
 
     private void OnBuildingPlaced()
@@ -64,6 +69,11 @@ public class AudioManager : MonoBehaviour
     private void OnPowerCollected()
     {
         PlaySfx(popSfx);
+    }
+
+    private void OnShopPlaced()
+    {
+        PlaySfx(cashSfx);
     }
 
     private void OnParkPlaced()

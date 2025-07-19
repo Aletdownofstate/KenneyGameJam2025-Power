@@ -10,6 +10,8 @@ TagManager:
   - Apartment
   - PowerPlant
   - Road
+  - Shop
+  - Park
   layers:
   - Default
   - TransparentFX

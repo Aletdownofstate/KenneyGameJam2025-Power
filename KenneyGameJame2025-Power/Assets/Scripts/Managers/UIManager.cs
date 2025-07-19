@@ -8,9 +8,9 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        availablePowerText.text = $"Available Power: {ResourceManager.Instance.availablePower.ToString()}";
-        maxPowerPlantsText.text = $"Power Plants: {ResourceManager.Instance.currentPowerPlants}/{ResourceManager.Instance.maximumPowerPlants}";
-        populationText.text = $"Population: {PopulationManager.Instance.currentPopulation}";
+        availablePowerText.text = $"{ResourceManager.Instance.availablePower.ToString()}";
+        maxPowerPlantsText.text = $"{ResourceManager.Instance.currentPowerPlants}/{ResourceManager.Instance.maximumPowerPlants}";
+        populationText.text = $"{PopulationManager.Instance.currentPopulation}";
         publicMoodText.text = $"Public Mood: {MoodManager.Instance.currentMood}";
     }
 
@@ -41,24 +41,24 @@ public class UIManager : MonoBehaviour
 
         MoodManager.onMoodChange -= UpdateMood;
         GeneratePower.onPowerPlantPlaced -= UpdateMood;
-        OnParkPlacement.onParkPlaced -= UpdateMood;
+        OnParkPlacement.onParkPlaced -= UpdateMood;        
 
         PlacementSystem.onEscPressed -= ShowOptions;
     }
 
     private void UpdateAvailablePower()
     {
-        availablePowerText.text = $"Available Power: {ResourceManager.Instance.availablePower.ToString()}";
+        availablePowerText.text = $"{ResourceManager.Instance.availablePower.ToString()}";
     }
 
     private void UpdateAvailablePowerPlants()
     {
-        maxPowerPlantsText.text = $"Power Plants: {ResourceManager.Instance.currentPowerPlants}/{ResourceManager.Instance.maximumPowerPlants}";
+        maxPowerPlantsText.text = $"{ResourceManager.Instance.currentPowerPlants}/{ResourceManager.Instance.maximumPowerPlants}";
     }
 
     private void UpdatePopulation()
     {
-        populationText.text = $"Population: {PopulationManager.Instance.currentPopulation}";
+        populationText.text = $"{PopulationManager.Instance.currentPopulation}";
     }
 
     private void UpdateMood()

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -5570913786333673126}
   m_Layer: 0
   m_Name: Park
-  m_TagString: Untagged
+  m_TagString: Park
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -116,6 +116,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: fence-1x4
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 787e9d71feeccdd438f428c6eb98d4bd, type: 3}
+      propertyPath: m_TagString
+      value: Park
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -177,6 +181,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: aaed746567178344f9a9216469490a64, type: 3}
       propertyPath: m_Name
       value: bush (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: aaed746567178344f9a9216469490a64, type: 3}
+      propertyPath: m_TagString
+      value: Park
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -240,6 +248,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: bench (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ff9ea53baf115ba4d981f70b808e8c40, type: 3}
+      propertyPath: m_TagString
+      value: Park
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -301,6 +313,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 47fa2a3d5f8369e49a985986a8734411, type: 3}
       propertyPath: m_Name
       value: planter
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 47fa2a3d5f8369e49a985986a8734411, type: 3}
+      propertyPath: m_TagString
+      value: Park
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -364,6 +380,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: path-stones-short
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1648df649b9bf934ab2e1668e910a993, type: 3}
+      propertyPath: m_TagString
+      value: Park
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -425,6 +445,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 07674af7cfc55e24794bc74e2f488e74, type: 3}
       propertyPath: m_Name
       value: tree-small (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 07674af7cfc55e24794bc74e2f488e74, type: 3}
+      propertyPath: m_TagString
+      value: Park
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -488,6 +512,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tree-small
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 07674af7cfc55e24794bc74e2f488e74, type: 3}
+      propertyPath: m_TagString
+      value: Park
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -549,6 +577,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 47fa2a3d5f8369e49a985986a8734411, type: 3}
       propertyPath: m_Name
       value: planter (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 47fa2a3d5f8369e49a985986a8734411, type: 3}
+      propertyPath: m_TagString
+      value: Park
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -612,6 +644,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: bush
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: aaed746567178344f9a9216469490a64, type: 3}
+      propertyPath: m_TagString
+      value: Park
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -673,6 +709,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 723ca6e1864ab8c42a7864a8908939d4, type: 3}
       propertyPath: m_Name
       value: path-stones-long (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 723ca6e1864ab8c42a7864a8908939d4, type: 3}
+      propertyPath: m_TagString
+      value: Park
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -736,6 +776,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: path-stones-long (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 723ca6e1864ab8c42a7864a8908939d4, type: 3}
+      propertyPath: m_TagString
+      value: Park
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -797,6 +841,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 723ca6e1864ab8c42a7864a8908939d4, type: 3}
       propertyPath: m_Name
       value: path-stones-long
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 723ca6e1864ab8c42a7864a8908939d4, type: 3}
+      propertyPath: m_TagString
+      value: Park
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -860,6 +908,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tree-large (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a4b72d96e7829bf48b0e769e5d6babb3, type: 3}
+      propertyPath: m_TagString
+      value: Park
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -921,6 +973,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: aaed746567178344f9a9216469490a64, type: 3}
       propertyPath: m_Name
       value: bush (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: aaed746567178344f9a9216469490a64, type: 3}
+      propertyPath: m_TagString
+      value: Park
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -984,6 +1040,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: bench
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ff9ea53baf115ba4d981f70b808e8c40, type: 3}
+      propertyPath: m_TagString
+      value: Park
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1046,6 +1106,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: path-stones-long (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 723ca6e1864ab8c42a7864a8908939d4, type: 3}
+      propertyPath: m_TagString
+      value: Park
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1107,6 +1171,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 47fa2a3d5f8369e49a985986a8734411, type: 3}
       propertyPath: m_Name
       value: planter (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 47fa2a3d5f8369e49a985986a8734411, type: 3}
+      propertyPath: m_TagString
+      value: Park
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1173,6 +1241,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 88cba4438cf9d794daf7651dcaa62b7e, type: 3}
       propertyPath: m_Name
       value: base
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 88cba4438cf9d794daf7651dcaa62b7e, type: 3}
+      propertyPath: m_TagString
+      value: Park
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1265,6 +1337,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tree-large (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a4b72d96e7829bf48b0e769e5d6babb3, type: 3}
+      propertyPath: m_TagString
+      value: Park
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1326,6 +1402,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: a4b72d96e7829bf48b0e769e5d6babb3, type: 3}
       propertyPath: m_Name
       value: tree-large (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a4b72d96e7829bf48b0e769e5d6babb3, type: 3}
+      propertyPath: m_TagString
+      value: Park
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
