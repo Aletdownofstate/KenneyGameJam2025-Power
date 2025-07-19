@@ -1,13 +1,19 @@
 using UnityEngine;
 using TMPro;
+using System.Collections.Generic;
 
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI availablePowerText, maxPowerPlantsText, populationText, publicMoodText;
     [SerializeField] GameObject optionsScreen;
+    [SerializeField] GameObject buttons, text, meters, images;
+
+    private List<GameObject> gameUiElements;
 
     private void Start()
     {
+        gameUiElements = new List<GameObject> { buttons, text, meters, images };
+
         availablePowerText.text = $"{ResourceManager.Instance.availablePower.ToString()}";
         maxPowerPlantsText.text = $"{ResourceManager.Instance.currentPowerPlants}/{ResourceManager.Instance.maximumPowerPlants}";
         populationText.text = $"{PopulationManager.Instance.currentPopulation}";
@@ -22,10 +28,12 @@ public class UIManager : MonoBehaviour
         PlacementSystem.onBuildingPlaced += UpdateAvailablePower;
 
         OnApartmentPlacement.onApartmentPlaced += UpdatePopulation;
+        OnHousePlacement.onHousePlacement += UpdatePopulation;
 
         MoodManager.onMoodChange += UpdateMood;
         GeneratePower.onPowerPlantPlaced += UpdateMood;
         OnParkPlacement.onParkPlaced += UpdateMood;
+        OnHousePlacement.onHousePlacement += UpdateMood;
 
         PlacementSystem.onEscPressed += ShowOptions;
     }
@@ -38,10 +46,12 @@ public class UIManager : MonoBehaviour
         PlacementSystem.onBuildingPlaced -= UpdateAvailablePower;
 
         OnApartmentPlacement.onApartmentPlaced -= UpdatePopulation;
+        OnHousePlacement.onHousePlacement -= UpdatePopulation;
 
         MoodManager.onMoodChange -= UpdateMood;
         GeneratePower.onPowerPlantPlaced -= UpdateMood;
-        OnParkPlacement.onParkPlaced -= UpdateMood;        
+        OnParkPlacement.onParkPlaced -= UpdateMood;
+        OnHousePlacement.onHousePlacement -= UpdateMood;
 
         PlacementSystem.onEscPressed -= ShowOptions;
     }
@@ -70,11 +80,21 @@ public class UIManager : MonoBehaviour
     {
         if (!optionsScreen.activeInHierarchy)
         {
+            foreach (var element in gameUiElements)
+            {
+                element.SetActive(false);
+            }
+
             optionsScreen.SetActive(true);
             Time.timeScale = 0;
         }
         else
         {
+            foreach (var element in gameUiElements)
+            {
+                element.SetActive(true);
+            }
+
             optionsScreen.SetActive(false);
             Time.timeScale = 1;
         }

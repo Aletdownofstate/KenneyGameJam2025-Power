@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlacementSystem : MonoBehaviour
@@ -24,6 +23,7 @@ public class PlacementSystem : MonoBehaviour
 
     private GameObject previewObject;
     private int selectedApartmentVariant = -1;
+    private int selectedHouseVariant = -1;
 
     public static event Action onBuildingPlaced, onEscPressed, onPowerPlantPlaced;
 
@@ -71,28 +71,21 @@ public class PlacementSystem : MonoBehaviour
     public void StartPlacement(int index)
     {
         selectedObjectIndex = buildingDatabase.buildingData.FindIndex(data => data.ID == index);
-        
+
         if (selectedObjectIndex < 0) return;
 
         if (buildingDatabase.buildingData[selectedObjectIndex].PowerCost > ResourceManager.Instance.availablePower)
-        { 
+        {
             StopPlacement();
-            return; 
+            return;
         }
 
-        if (buildingDatabase.buildingData[selectedObjectIndex].Name == "Power Plant" 
+        if (buildingDatabase.buildingData[selectedObjectIndex].Name == "Power Plant"
             && ResourceManager.Instance.currentPowerPlants == ResourceManager.Instance.maximumPowerPlants) return;
 
         previewObject = Instantiate(buildingDatabase.buildingData[selectedObjectIndex].Prefab);
 
-        // Randomise the building variant if the preview building is an apartment
-
-        var randomiser = previewObject.GetComponent<GetRandomApartment>();
-        if (randomiser != null)
-        {
-            selectedApartmentVariant = randomiser.GetRandomVariant();
-            randomiser.SetVariant(selectedApartmentVariant);
-        }
+        GetPreviewBuildingVariant();
 
         inputManager.OnClicked += PlaceStructure;
         inputManager.OnExit += StopPlacement;
@@ -114,13 +107,7 @@ public class PlacementSystem : MonoBehaviour
         newObject.transform.position = placePosition;
         newObject.transform.rotation = previewObject.transform.rotation;
 
-        // Apply randomised building variant if applicable
-
-        var randomiser = newObject.GetComponent<GetRandomApartment>();
-        if (randomiser != null && selectedApartmentVariant >= 0)
-        {
-            randomiser.SetVariant(selectedApartmentVariant);
-        }
+        GetPlacedBuildingVariant(newObject);
 
         objectData.AddObjectAt(gridPos, buildingDatabase.buildingData[selectedObjectIndex].Size,
             buildingDatabase.buildingData[selectedObjectIndex].ID, selectedObjectIndex);
@@ -130,6 +117,42 @@ public class PlacementSystem : MonoBehaviour
 
         Destroy(previewObject);
         StopPlacement();
+    }
+
+    private void GetPreviewBuildingVariant()
+    {
+        var apartmentRandomiser = previewObject.GetComponent<GetRandomApartment>();
+        if (apartmentRandomiser != null)
+        {
+            selectedApartmentVariant = apartmentRandomiser.GetRandomVariant();
+            apartmentRandomiser.SetVariant(selectedApartmentVariant);
+        }
+
+        var houseRandomiser = previewObject.GetComponent<GetRandomHouse>();
+        if (houseRandomiser != null)
+        {
+            selectedHouseVariant = houseRandomiser.GetRandomVariant();
+            houseRandomiser.SetVariant(selectedHouseVariant);
+        }
+    }
+
+    private void GetPlacedBuildingVariant(GameObject newObject)
+    {
+        // Randomise the building variant if the preview building is an apartment
+
+        var apartmentRandomiser = newObject.GetComponent<GetRandomApartment>();
+        if (apartmentRandomiser != null && selectedApartmentVariant >= 0)
+        {
+            apartmentRandomiser.SetVariant(selectedApartmentVariant);
+        }
+
+        // Randomise the building variant if the preview building is an apartment
+
+        var houseRandomiser = newObject.GetComponent<GetRandomHouse>();
+        if (houseRandomiser != null && selectedHouseVariant >= 0)
+        {
+            houseRandomiser.SetVariant(selectedHouseVariant);
+        }
     }
 
     private bool CheckPlacementValidity(Vector3Int gridPos, int selectedObjectIndex)
@@ -193,6 +216,9 @@ public class PlacementSystem : MonoBehaviour
                 }
 
                 ResourceManager.Instance.RemovePower(buildingDatabase.buildingData[selectedObjectIndex].PowerCost);
+                break;
+
+            case 4: // House - does nothing currently
                 break;
         }
     }

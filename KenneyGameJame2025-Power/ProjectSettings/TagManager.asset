@@ -12,6 +12,7 @@ TagManager:
   - Road
   - Shop
   - Park
+  - House
   layers:
   - Default
   - TransparentFX
