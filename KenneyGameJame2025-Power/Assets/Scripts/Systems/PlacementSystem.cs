@@ -21,6 +21,7 @@ public class PlacementSystem : MonoBehaviour
     [SerializeField] private Material invalidPlacementMaterial;
 
     private GameObject previewObject;
+    private int selectedApartmentVariant = -1;
 
     public static event Action onBuildingPlaced, onEscPressed, onPowerPlantPlaced;
 
@@ -79,6 +80,16 @@ public class PlacementSystem : MonoBehaviour
             && ResourceManager.Instance.currentPowerPlants == ResourceManager.Instance.maximumPowerPlants) return;
 
         previewObject = Instantiate(buildingDatabase.buildingData[selectedObjectIndex].Prefab);
+
+        // Randomise the building variant if the preview building is an apartment
+
+        var randomiser = previewObject.GetComponent<GetRandomApartment>();
+        if (randomiser != null)
+        {
+            selectedApartmentVariant = randomiser.GetRandomVariant();
+            randomiser.SetVariant(selectedApartmentVariant);
+        }
+
         inputManager.OnClicked += PlaceStructure;
         inputManager.OnExit += StopPlacement;
     }
@@ -97,14 +108,21 @@ public class PlacementSystem : MonoBehaviour
         placePosition.y = inputManager.GetMousePosOrthographic().y;
 
         newObject.transform.position = placePosition;
-        
         newObject.transform.rotation = previewObject.transform.rotation;
+
+        // Apply randomised building variant if applicable
+
+        var randomiser = newObject.GetComponent<GetRandomApartment>();
+        if (randomiser != null && selectedApartmentVariant >= 0)
+        {
+            randomiser.SetVariant(selectedApartmentVariant);
+        }
 
         objectData.AddObjectAt(gridPos, buildingDatabase.buildingData[selectedObjectIndex].Size,
             buildingDatabase.buildingData[selectedObjectIndex].ID, selectedObjectIndex);
 
         ActivateBuildingTraits(selectedObjectIndex, newObject);
-        onBuildingPlaced?.Invoke();       
+        onBuildingPlaced?.Invoke();
 
         Destroy(previewObject);
         StopPlacement();
@@ -127,7 +145,7 @@ public class PlacementSystem : MonoBehaviour
     {
         switch (index)
         {
-            case 0:
+            case 0: // Power Plant
                 var powerGen = newObject.GetComponent<GeneratePower>();
                 if (powerGen != null)
                 {
@@ -139,7 +157,10 @@ public class PlacementSystem : MonoBehaviour
                 onPowerPlantPlaced?.Invoke();
                 break;
 
-            case 1:
+            case 1: // Shop - nothing currently                
+                break;
+
+            case 2: // Apartment
                 var addPopulation = newObject.GetComponent<AddPopulationOnPlace>();
                 if (addPopulation != null)
                 {

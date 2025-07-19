@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class GeneratePower : MonoBehaviour
@@ -9,31 +10,51 @@ public class GeneratePower : MonoBehaviour
     private int powerPerInterval = 1;
     private float interval = 10f;
 
-    private bool isGenerating = false;
+    private bool isReadyToHarvest = false;
 
     public static event Action onPowerIncrease;
     public static event Action onPowerPlantPlacement;
+    public static event Action onPowerCollect;
 
     private void Start()
     {
-        StartGeneratingPower();
-
         onPowerPlantPlacement?.Invoke();
 
-        boltObject.SetActive(true);
-        anim.SetTrigger("TriggerRise");
+        IncreasePower();
+
+        StartCoroutine(PowerCycle());
     }
 
-    private void StartGeneratingPower()
+    private IEnumerator PowerCycle()
     {
-        if (!isGenerating)
+        while (!isReadyToHarvest)
         {
-            isGenerating = true;
-            InvokeRepeating(nameof(Generate), interval, interval);
+            yield return new WaitForSeconds(interval);
+
+            boltObject.SetActive(true);
+            anim.SetTrigger("TriggerRise");
+
+            isReadyToHarvest = true;
         }
     }
 
-    private void Generate()
+    public void TryHarvest()
+    {
+        if (isReadyToHarvest)
+        {
+            IncreasePower();
+            isReadyToHarvest = false;
+
+            onPowerCollect?.Invoke();
+
+            anim.ResetTrigger("TriggerRise");
+            boltObject.SetActive(false);
+
+            StartCoroutine(PowerCycle());
+        }
+    }
+
+    private void IncreasePower()
     {
         ResourceManager.Instance.AddPower(powerPerInterval);
         onPowerIncrease?.Invoke();

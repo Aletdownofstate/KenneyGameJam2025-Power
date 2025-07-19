@@ -11,6 +11,7 @@ public class AudioManager : MonoBehaviour
     [Header("Audio Clips")]
     [SerializeField] private AudioClip zapSfx;
     [SerializeField] private AudioClip thudSfx;
+    [SerializeField] private AudioClip popSfx;
 
     private void Awake()
     {
@@ -33,12 +34,16 @@ public class AudioManager : MonoBehaviour
     {
         PlacementSystem.onBuildingPlaced += OnBuildingPlaced;
         PlacementSystem.onPowerPlantPlaced += OnPowerPlantPlaced;
+
+        GeneratePower.onPowerCollect += OnPowerCollected;
     }
 
     private void OnDisable()
     {
         PlacementSystem.onBuildingPlaced -= OnBuildingPlaced;
         PlacementSystem.onPowerPlantPlaced -= OnPowerPlantPlaced;
+
+        GeneratePower.onPowerCollect -= OnPowerCollected;
     }
 
     private void OnBuildingPlaced()
@@ -49,6 +54,11 @@ public class AudioManager : MonoBehaviour
     private void OnPowerPlantPlaced()
     {
         PlaySfx(zapSfx);
+    }
+
+    private void OnPowerCollected()
+    {
+        PlaySfx(popSfx);
     }
 
     public void PlaySfx(AudioClip clip)

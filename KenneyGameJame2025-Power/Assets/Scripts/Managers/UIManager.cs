@@ -3,14 +3,15 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI availablePowerText, maxPowerPlants, population;
+    [SerializeField] private TextMeshProUGUI availablePowerText, maxPowerPlantsText, populationText, publicMoodText;
     [SerializeField] GameObject optionsScreen;
 
     private void Start()
     {
         availablePowerText.text = $"Available Power: {ResourceManager.Instance.availablePower.ToString()}";
-        maxPowerPlants.text = $"Power Plants: {ResourceManager.Instance.currentPowerPlants}/{ResourceManager.Instance.maximumPowerPlants}";
-        population.text = $"Population: {PopulationManager.Instance.currentPopulation}";
+        maxPowerPlantsText.text = $"Power Plants: {ResourceManager.Instance.currentPowerPlants}/{ResourceManager.Instance.maximumPowerPlants}";
+        populationText.text = $"Population: {PopulationManager.Instance.currentPopulation}";
+        publicMoodText.text = $"Public Mood: {MoodManager.Instance.currentMood}";
     }
 
     private void OnEnable()
@@ -19,6 +20,7 @@ public class UIManager : MonoBehaviour
         GeneratePower.onPowerPlantPlacement += UpdateAvailablePowerPlants;
         PlacementSystem.onBuildingPlaced += UpdateAvailablePower;
         AddPopulationOnPlace.onPopulationIncrease += UpdatePopulation;
+        MoodManager.onMoodChange += UpdateMood;
 
         PlacementSystem.onEscPressed += ShowOptions;
     }
@@ -29,6 +31,7 @@ public class UIManager : MonoBehaviour
         GeneratePower.onPowerPlantPlacement -= UpdateAvailablePowerPlants;
         PlacementSystem.onBuildingPlaced -= UpdateAvailablePower;
         AddPopulationOnPlace.onPopulationIncrease -= UpdatePopulation;
+        MoodManager.onMoodChange -= UpdateMood;
 
         PlacementSystem.onEscPressed -= ShowOptions;
     }
@@ -40,12 +43,17 @@ public class UIManager : MonoBehaviour
 
     private void UpdateAvailablePowerPlants()
     {
-        maxPowerPlants.text = $"Power Plants: {ResourceManager.Instance.currentPowerPlants}/{ResourceManager.Instance.maximumPowerPlants}";
+        maxPowerPlantsText.text = $"Power Plants: {ResourceManager.Instance.currentPowerPlants}/{ResourceManager.Instance.maximumPowerPlants}";
     }
 
     private void UpdatePopulation()
     {
-        population.text = $"Population: {PopulationManager.Instance.currentPopulation}";
+        populationText.text = $"Population: {PopulationManager.Instance.currentPopulation}";
+    }
+
+    private void UpdateMood()
+    {
+        publicMoodText.text = $"Public Mood: {MoodManager.Instance.currentMood}";
     }
 
     private void ShowOptions()
