@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlacementSystem : MonoBehaviour
@@ -8,6 +9,7 @@ public class PlacementSystem : MonoBehaviour
 
     [Header("Grid Settings")]
     [SerializeField] private Grid grid;
+    [SerializeField] private LayerMask roadLayerMask;
 
     private GridData objectData;
 
@@ -30,6 +32,8 @@ public class PlacementSystem : MonoBehaviour
         StopPlacement();
 
         objectData = new();
+
+        RegisterRoads();
     }
 
     private void Update()
@@ -180,6 +184,18 @@ public class PlacementSystem : MonoBehaviour
                 ResourceManager.Instance.RemovePower(buildingDatabase.buildingData[selectedObjectIndex].PowerCost);
                 break;
 
+        }
+    }
+
+    private void RegisterRoads()
+    {
+        GameObject[] roadObjects = GameObject.FindGameObjectsWithTag("Road");
+
+        foreach (var road in roadObjects)
+        {
+            Vector3Int gridPos = grid.WorldToCell(road.transform.position);
+
+            objectData.AddObjectAt(gridPos, new Vector2Int(2, 2), -1, -1);
         }
     }
 }

@@ -9,6 +9,7 @@ TagManager:
   - Options
   - Apartment
   - PowerPlant
+  - Road
   layers:
   - Default
   - TransparentFX
@@ -16,7 +17,7 @@ TagManager:
   - Placement
   - Water
   - UI
-  - 
+  - Road
   - 
   - 
   - 
