@@ -22,7 +22,7 @@ public class PlacementSystem : MonoBehaviour
 
     private GameObject previewObject;
 
-    public static event Action onBuildingPlaced, onEscPressed;
+    public static event Action onBuildingPlaced, onEscPressed, onPowerPlantPlaced;
 
     private void Start()
     {
@@ -37,10 +37,10 @@ public class PlacementSystem : MonoBehaviour
 
         if (selectedObjectIndex < 0 || previewObject == null) return;
 
-        Vector3 mousePos = inputManager.GetSelectedMapPosition();
+        Vector3 mousePos = inputManager.GetMousePosOrthographic();
         Vector3Int gridPos = grid.WorldToCell(mousePos);
         Vector3 snappedWorldPos = grid.CellToWorld(gridPos);
-        snappedWorldPos.y = inputManager.GetSelectedMapPosition().y;
+        snappedWorldPos.y = inputManager.GetMousePosOrthographic().y;
 
         bool placementValidity = CheckPlacementValidity(gridPos, selectedObjectIndex);
 
@@ -87,14 +87,15 @@ public class PlacementSystem : MonoBehaviour
     {
         if (inputManager.IsPointerOverUI()) return;
 
-        Vector3 mousePos = inputManager.GetSelectedMapPosition();
+        Vector3 mousePos = inputManager.GetMousePosOrthographic();
         Vector3Int gridPos = grid.WorldToCell(mousePos);
 
         if (!CheckPlacementValidity(gridPos, selectedObjectIndex)) return;
 
         GameObject newObject = Instantiate(buildingDatabase.buildingData[selectedObjectIndex].Prefab);
         Vector3 placePosition = grid.CellToWorld(gridPos);
-        placePosition.y = inputManager.GetSelectedMapPosition().y;
+        placePosition.y = inputManager.GetMousePosOrthographic().y;
+
         newObject.transform.position = placePosition;
         
         newObject.transform.rotation = previewObject.transform.rotation;
@@ -102,17 +103,10 @@ public class PlacementSystem : MonoBehaviour
         objectData.AddObjectAt(gridPos, buildingDatabase.buildingData[selectedObjectIndex].Size,
             buildingDatabase.buildingData[selectedObjectIndex].ID, selectedObjectIndex);
 
-        var powerGen = newObject.GetComponent<GeneratePower>();
-        if (powerGen != null)
-        {
-            powerGen.enabled = true;
-        }
-
-        ResourceManager.Instance.RemovePower(buildingDatabase.buildingData[selectedObjectIndex].PowerCost);
+        ActivateBuildingTraits(selectedObjectIndex, newObject);
         onBuildingPlaced?.Invoke();       
 
         Destroy(previewObject);
-
         StopPlacement();
     }
 
@@ -126,6 +120,35 @@ public class PlacementSystem : MonoBehaviour
         foreach (var renderer in obj.GetComponentsInChildren<Renderer>())
         {
             renderer.material = mat;
+        }
+    }
+
+    private void ActivateBuildingTraits(int index, GameObject newObject)
+    {
+        switch (index)
+        {
+            case 0:
+                var powerGen = newObject.GetComponent<GeneratePower>();
+                if (powerGen != null)
+                {
+                    powerGen.enabled = true;
+                }
+
+                ResourceManager.Instance.RemovePower(buildingDatabase.buildingData[selectedObjectIndex].PowerCost);
+
+                onPowerPlantPlaced?.Invoke();
+                break;
+
+            case 1:
+                var addPopulation = newObject.GetComponent<AddPopulationOnPlace>();
+                if (addPopulation != null)
+                {
+                    addPopulation.enabled = true;
+                }
+
+                ResourceManager.Instance.RemovePower(buildingDatabase.buildingData[selectedObjectIndex].PowerCost);
+                break;
+
         }
     }
 }

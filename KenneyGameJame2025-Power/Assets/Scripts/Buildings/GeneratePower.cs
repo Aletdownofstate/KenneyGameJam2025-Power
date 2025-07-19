@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class GeneratePower : MonoBehaviour
 {
+    [SerializeField] private Animator anim;
+    [SerializeField] private GameObject boltObject;
+
     private int powerPerInterval = 1;
     private float interval = 10f;
 
@@ -16,6 +19,9 @@ public class GeneratePower : MonoBehaviour
         StartGeneratingPower();
 
         onPowerPlantPlacement?.Invoke();
+
+        boltObject.SetActive(true);
+        anim.SetTrigger("TriggerRise");
     }
 
     private void StartGeneratingPower()

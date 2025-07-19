@@ -32,17 +32,23 @@ public class AudioManager : MonoBehaviour
     private void OnEnable()
     {
         PlacementSystem.onBuildingPlaced += OnBuildingPlaced;
+        PlacementSystem.onPowerPlantPlaced += OnPowerPlantPlaced;
     }
 
     private void OnDisable()
     {
         PlacementSystem.onBuildingPlaced -= OnBuildingPlaced;
+        PlacementSystem.onPowerPlantPlaced -= OnPowerPlantPlaced;
     }
 
     private void OnBuildingPlaced()
+    {        
+        PlaySfx(thudSfx);
+    }
+
+    private void OnPowerPlantPlaced()
     {
         PlaySfx(zapSfx);
-        PlaySfx(thudSfx);
     }
 
     public void PlaySfx(AudioClip clip)

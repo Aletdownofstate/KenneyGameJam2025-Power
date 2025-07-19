@@ -20,14 +20,14 @@ public class InputManager : MonoBehaviour
 
     public bool IsPointerOverUI() => EventSystem.current.IsPointerOverGameObject();
 
-    public Vector3 GetSelectedMapPosition()
+    public Vector3 GetMousePosOrthographic()
     {
+        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, 100f, placementLayerMask))
+        if (groundPlane.Raycast(ray, out float enter))
         {
-            lastPosition = hit.point;
+            lastPosition = ray.GetPoint(enter);
         }
 
         return lastPosition;
