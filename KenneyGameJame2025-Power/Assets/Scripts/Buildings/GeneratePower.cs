@@ -8,7 +8,7 @@ public class GeneratePower : MonoBehaviour
     [SerializeField] private GameObject boltObject;
 
     private int powerPerInterval = 1;
-    private float interval = 10f;
+    private float interval = 7.5f;
 
     private bool isReadyToHarvest = false;
 

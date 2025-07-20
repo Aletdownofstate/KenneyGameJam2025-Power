@@ -13,7 +13,7 @@ public class OnParkPlacement : MonoBehaviour
 
         foreach (var hit in colliders)
         {
-            if (hit.gameObject.CompareTag("Apartment"))
+            if (hit.gameObject.CompareTag("Apartment") || hit.gameObject.CompareTag("House"))
             {
                 Debug.Log($"Hit {hit.name}");
                 MoodManager.Instance.IncreaseMood(1);

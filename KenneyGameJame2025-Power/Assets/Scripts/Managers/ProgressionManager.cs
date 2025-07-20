@@ -9,12 +9,13 @@ public class ProgressionManager : MonoBehaviour
     [SerializeField] private GameObject shopBtn;
     [SerializeField] private GameObject parkBtn;
     [SerializeField] private GameObject houseBtn;
+    [SerializeField] private GameObject landfillBtn;
 
     private List<GameObject> buttons;
 
     private void Start()
     {
-        buttons = new List<GameObject> { powerPlantBtn, apartmentBtn, shopBtn, parkBtn, houseBtn };
+        buttons = new List<GameObject> { powerPlantBtn, apartmentBtn, shopBtn, parkBtn, houseBtn, landfillBtn };
 
         foreach (var button in buttons)
         {
@@ -33,6 +34,7 @@ public class ProgressionManager : MonoBehaviour
         PopulationManager.onFirstBuildingMilestone += ActivateShopBtn;
         PopulationManager.onSecondBuildingMilestone += ActivateParkBtn;
         PopulationManager.onThirdBuildingMilestone += ActivateHouseBtn;
+        PopulationManager.onFourthBuildingMilestone += ActivateLandfillBtn;
     }
 
     private void OnDisable()
@@ -41,6 +43,7 @@ public class ProgressionManager : MonoBehaviour
         PopulationManager.onFirstBuildingMilestone -= ActivateShopBtn;
         PopulationManager.onSecondBuildingMilestone -= ActivateParkBtn;
         PopulationManager.onThirdBuildingMilestone -= ActivateHouseBtn;
+        PopulationManager.onFourthBuildingMilestone -= ActivateLandfillBtn;
     }
 
     private void ActivateApartmentButton()
@@ -61,5 +64,10 @@ public class ProgressionManager : MonoBehaviour
     private void ActivateHouseBtn()
     {
         if (!houseBtn.activeInHierarchy) houseBtn.SetActive(true);
+    }
+
+    private void ActivateLandfillBtn()
+    {
+        if (!landfillBtn.activeInHierarchy) landfillBtn.SetActive(true);
     }
 }

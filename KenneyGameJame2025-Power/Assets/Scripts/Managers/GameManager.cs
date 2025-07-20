@@ -1,23 +1,10 @@
-using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    private void Awake()
+    public void RestartGame()
     {
-        StartCoroutine(InitialiseOptions());
-    }
-
-    private void Start()
-    {
-        
-    }
-
-    private IEnumerator InitialiseOptions()
-    {
-        GameObject optionsManager = GameObject.FindGameObjectWithTag("Options");
-        optionsManager.SetActive(true);
-        yield return null;
-        optionsManager.SetActive(false);
+        SceneManager.LoadScene(1);
     }
 }

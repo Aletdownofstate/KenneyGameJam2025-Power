@@ -12,13 +12,13 @@ public class UIManager : MonoBehaviour
 
     [Header("Options")]
     [SerializeField] GameObject optionsScreen;
-    [SerializeField] GameObject buttons, text, meters, images;
+    [SerializeField] GameObject buttons, text, meters, images, needs;
 
     private List<GameObject> gameUiElements;
 
     private void Start()
     {
-        gameUiElements = new List<GameObject> { buttons, text, meters, images };
+        gameUiElements = new List<GameObject> { buttons, text, meters, images, needs };
 
         availablePowerText.text = $"{ResourceManager.Instance.availablePower.ToString()}";
         maxPowerPlantsText.text = $"{ResourceManager.Instance.currentPowerPlants}/{ResourceManager.Instance.maximumPowerPlants}";
@@ -40,6 +40,7 @@ public class UIManager : MonoBehaviour
         GeneratePower.onPowerPlantPlaced += UpdateMood;
         OnParkPlacement.onParkPlaced += UpdateMood;
         OnHousePlacement.onHousePlaced += UpdateMood;
+        OnLandfillPlacement.onLandfillPlaced += UpdateMood;
 
         PlacementSystem.onEscPressed += ShowOptions;
     }
@@ -58,6 +59,7 @@ public class UIManager : MonoBehaviour
         GeneratePower.onPowerPlantPlaced -= UpdateMood;
         OnParkPlacement.onParkPlaced -= UpdateMood;
         OnHousePlacement.onHousePlaced -= UpdateMood;
+        OnLandfillPlacement.onLandfillPlaced -= UpdateMood;
 
         PlacementSystem.onEscPressed -= ShowOptions;
     }

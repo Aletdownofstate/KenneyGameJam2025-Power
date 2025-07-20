@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4878223927013779587}
   m_Layer: 6
   m_Name: RoadCorner
-  m_TagString: Untagged
+  m_TagString: Landfill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

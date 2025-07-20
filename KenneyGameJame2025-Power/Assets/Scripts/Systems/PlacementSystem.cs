@@ -92,7 +92,11 @@ public class PlacementSystem : MonoBehaviour
 
     private void PlaceStructure()
     {
-        if (inputManager.IsPointerOverUI()) return;
+        if (inputManager.IsPointerOverUI()) 
+        { 
+            StopPlacement();
+            return;
+        } 
 
         Vector3 mousePos = inputManager.GetMousePosOrthographic();
         Vector3Int gridPos = grid.WorldToCell(mousePos);
@@ -174,11 +178,11 @@ public class PlacementSystem : MonoBehaviour
             // Power Plant
 
             case 0:
-                var powerGen = newObject.GetComponent<GeneratePower>();
+                var generatePower = newObject.GetComponent<GeneratePower>();
 
-                if (powerGen != null)
+                if (generatePower != null)
                 {
-                    powerGen.enabled = true;
+                    generatePower.enabled = true;
                 }
 
                 ResourceManager.Instance.RemovePower(buildingDatabase.buildingData[selectedObjectIndex].PowerCost);
@@ -189,11 +193,11 @@ public class PlacementSystem : MonoBehaviour
             // Shop
 
             case 1:
-                var shop = newObject.GetComponent<OnShopPlacement>();
+                var onShopPlacement = newObject.GetComponent<OnShopPlacement>();
 
-                if (shop != null)
+                if (onShopPlacement != null)
                 {
-                    shop.enabled = true;
+                    onShopPlacement.enabled = true;
                 }
 
                 ResourceManager.Instance.RemovePower(buildingDatabase.buildingData[selectedObjectIndex].PowerCost);
@@ -202,11 +206,11 @@ public class PlacementSystem : MonoBehaviour
             // Apartment
 
             case 2: 
-                var addApartmentPopulation = newObject.GetComponent<OnApartmentPlacement>();
+                var onApartmentPlacement = newObject.GetComponent<OnApartmentPlacement>();
 
-                if (addApartmentPopulation != null)
+                if (onApartmentPlacement != null)
                 {
-                    addApartmentPopulation.enabled = true;
+                    onApartmentPlacement.enabled = true;
                 }
 
                 ResourceManager.Instance.RemovePower(buildingDatabase.buildingData[selectedObjectIndex].PowerCost);
@@ -215,11 +219,11 @@ public class PlacementSystem : MonoBehaviour
             // Park
 
             case 3:
-                var addMood = newObject.GetComponent<OnParkPlacement>();
+                var onParkPlacement = newObject.GetComponent<OnParkPlacement>();
 
-                if (addMood != null)
+                if (onParkPlacement != null)
                 {
-                    addMood.enabled = true;
+                    onParkPlacement.enabled = true;
                 }
 
                 ResourceManager.Instance.RemovePower(buildingDatabase.buildingData[selectedObjectIndex].PowerCost);
@@ -228,11 +232,24 @@ public class PlacementSystem : MonoBehaviour
             // House
 
             case 4: 
-                var addHousePopulation = newObject.GetComponent<OnHousePlacement>();
+                var onHousePlacement = newObject.GetComponent<OnHousePlacement>();
 
-                if (addHousePopulation != null)
+                if (onHousePlacement != null)
                 {
-                    addHousePopulation.enabled = true;
+                    onHousePlacement.enabled = true;
+                }
+
+                ResourceManager.Instance.RemovePower(buildingDatabase.buildingData[selectedObjectIndex].PowerCost);
+                break;
+
+            // Landfill
+
+            case 5:
+                var onLandfillPlacement = newObject.GetComponent<OnLandfillPlacement>();
+
+                if (onLandfillPlacement != null)
+                {
+                    onLandfillPlacement.enabled = true;
                 }
 
                 ResourceManager.Instance.RemovePower(buildingDatabase.buildingData[selectedObjectIndex].PowerCost);

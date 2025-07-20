@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class MoodManager : MonoBehaviour
@@ -8,9 +9,11 @@ public class MoodManager : MonoBehaviour
     public enum Mood { VeryUnhappy, Unhappy, Neutral, Happy, VeryHappy }
     public Mood currentMood;
 
-    public int moodValue;
+    public float moodValue;
 
-    public static event Action onMoodChange;
+    private bool isGameOverTimerRunning = false;
+
+    public static event Action onMoodChange, onGameOverTimer, onGameOver;
 
     private void Awake()
     {
@@ -39,13 +42,13 @@ public class MoodManager : MonoBehaviour
         onMoodChange -= MoodChanges;
     }
 
-    public void IncreaseMood(int amount)
+    public void IncreaseMood(float amount)
     {
         moodValue += amount;
         UpdateMoodLevel();
     }
 
-    public void DecreaseMood(int amount)
+    public void DecreaseMood(float amount)
     {
         moodValue -= amount;
         UpdateMoodLevel();
@@ -72,10 +75,20 @@ public class MoodManager : MonoBehaviour
         {
             case Mood.VeryUnhappy:
                 PopulationManager.Instance.RemoveRandomPopulation(150);
+                if (!isGameOverTimerRunning)
+                {
+                    StartCoroutine(UnhappyCountdown());
+                }
                 break;
 
             case Mood.Unhappy:
-                PopulationManager.Instance.RemoveRandomPopulation(100);
+                PopulationManager.Instance.RemoveRandomPopulation(100);                
+                StopCoroutine(UnhappyCountdown());
+                if (isGameOverTimerRunning)
+                {
+                    isGameOverTimerRunning = false;
+                    Debug.Log("Gameover timer is no longer running.");
+                }
                 break;
 
             case Mood.Neutral:
@@ -89,5 +102,17 @@ public class MoodManager : MonoBehaviour
                 PopulationManager.Instance.AddRandomPopulation(150);
                 break;
         }
+    }
+
+    private IEnumerator UnhappyCountdown()
+    {
+        isGameOverTimerRunning = true;
+        onGameOverTimer?.Invoke();
+
+        Debug.Log("Unhappy countdown started, gameover in 120s.");
+        yield return new WaitForSeconds(120);
+        Debug.Log("Countdown complete. Gameover");
+
+        onGameOver?.Invoke();
     }
 }

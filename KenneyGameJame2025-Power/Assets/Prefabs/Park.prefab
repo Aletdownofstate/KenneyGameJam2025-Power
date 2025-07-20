@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -5570913786333673126}
   m_Layer: 0
   m_Name: Park
-  m_TagString: Park
+  m_TagString: Landfill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

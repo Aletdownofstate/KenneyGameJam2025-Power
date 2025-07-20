@@ -23,3 +23,9 @@ MonoBehaviour:
       has been unlocked.\n\nHouses cost more power, but increase mood more.
   - <PopUpText>k__BackingField: Power is required for all buildings!\n\nClick the
       lightning bolts as they appear to get more power.
+  - <PopUpText>k__BackingField: You've hit a population milestone!\n\nA new building
+      has been unlocked.\n\nLandfills can drastically reduce the mood when placed
+      poorly.
+  - <PopUpText>k__BackingField: Game Over!\n\nYour population has become too unhappy!
+  - <PopUpText>k__BackingField: Your population is very unhappy! They will leave
+      soon if you don't increase their mood!

@@ -205,7 +205,9 @@ public class OptionsManager : MonoBehaviour
 
         if (PlayerPrefs.HasKey(MASTER_VOLUME_KEY))
         {
-            masterVolumeSlider.value = PlayerPrefs.GetInt(MASTER_VOLUME_KEY);
+            int volume = PlayerPrefs.GetInt(MASTER_VOLUME_KEY);
+            masterVolumeSlider.value = volume;
+            mixer.SetFloat("masterVolume", volume);
         }        
 
         if (PlayerPrefs.HasKey(MUSIC_VOLUME_KEY))

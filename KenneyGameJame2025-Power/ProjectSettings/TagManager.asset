@@ -13,6 +13,8 @@ TagManager:
   - Shop
   - Park
   - House
+  - Landfill
+  - OptionsManager
   layers:
   - Default
   - TransparentFX
