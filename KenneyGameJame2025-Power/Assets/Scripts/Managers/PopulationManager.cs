@@ -16,9 +16,11 @@ public class PopulationManager : MonoBehaviour
     private bool thirdBuildingMilestone = false;
     private bool fourthBuildingMilestone = false;
 
+    private bool isFirstApartmentPlaced = false;
+
     public static event Action onPopulationMilestone;
     public static event Action onFirstBuildingMilestone, onSecondBuildingMilestone, onThirdBuildingMilestone, onFourthBuildingMilestone;
-    public static event Action onPopulationAdded, onPopulationRemoved;
+    public static event Action onPopulationAdded, onPopulationRemoved, onTickerPopulationAdded;
 
     private void Awake()
     {
@@ -30,6 +32,16 @@ public class PopulationManager : MonoBehaviour
         {
             Instance = this;
         }
+    }
+
+    private void OnEnable()
+    {
+        OnApartmentPlacement.onApartmentPlaced += PopulationTicker;
+    }
+
+    private void OnDisable()
+    {
+        OnApartmentPlacement.onApartmentPlaced -= PopulationTicker;
     }
 
     public void AddRandomPopulation(int max)
@@ -98,4 +110,19 @@ public class PopulationManager : MonoBehaviour
             onFourthBuildingMilestone?.Invoke();
         }
     }
+
+    private void PopulationTicker()
+    {
+        if (isFirstApartmentPlaced) return;
+        
+        isFirstApartmentPlaced = true;
+
+        InvokeRepeating("AddTickerPopulation", 10f, 10f);
+    }
+
+    private void AddTickerPopulation()
+    {
+        AddRandomPopulation(25);
+        onTickerPopulationAdded?.Invoke();
+    }    
 }

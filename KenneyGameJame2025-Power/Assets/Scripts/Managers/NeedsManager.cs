@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -37,6 +36,7 @@ public class NeedsManager : MonoBehaviour
         PopulationManager.onPopulationAdded += () => IncreaseLandfillNeed(0.05f);
         PopulationManager.onPopulationAdded += () => IncreaseShopNeed(0.1f);
         PopulationManager.onPopulationAdded += () => IncreaseParkNeed(0.05f);
+        PopulationManager.onTickerPopulationAdded += () => IncreaseHousingNeed(0.5f);
 
         OnParkPlacement.onParkPlaced += () => IncreaseHousingNeed(0.15f);
         OnParkPlacement.onParkPlaced += () => DecreaseParkNeed(0.15f);

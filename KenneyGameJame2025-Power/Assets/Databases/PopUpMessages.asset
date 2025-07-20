@@ -26,6 +26,10 @@ MonoBehaviour:
   - <PopUpText>k__BackingField: You've hit a population milestone!\n\nA new building
       has been unlocked.\n\nLandfills can drastically reduce the mood when placed
       poorly.
-  - <PopUpText>k__BackingField: Game Over!\n\nYour population has become too unhappy!
+  - <PopUpText>k__BackingField: Game Over!\n\nYour population has become too unhappy!\n\nThanks
+      for playing!
   - <PopUpText>k__BackingField: Your population is very unhappy! They will leave
       soon if you don't increase their mood!
+  - <PopUpText>k__BackingField: Power to the People! can be controlled exclusively
+      with the mouse.\n\nYou must build up your population while keeping them happy.\n\nThe
+      meters in the bottom right indicate their current needs.

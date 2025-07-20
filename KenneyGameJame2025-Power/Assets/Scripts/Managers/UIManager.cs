@@ -35,6 +35,8 @@ public class UIManager : MonoBehaviour
 
         OnApartmentPlacement.onApartmentPlaced += UpdatePopulation;
         OnHousePlacement.onHousePlaced += UpdatePopulation;
+        PopulationManager.onPopulationAdded += UpdatePopulation;
+        PopulationManager.onTickerPopulationAdded += UpdatePopulation;
 
         MoodManager.onMoodChange += UpdateMood;
         GeneratePower.onPowerPlantPlaced += UpdateMood;
@@ -54,6 +56,8 @@ public class UIManager : MonoBehaviour
 
         OnApartmentPlacement.onApartmentPlaced -= UpdatePopulation;
         OnHousePlacement.onHousePlaced -= UpdatePopulation;
+        PopulationManager.onPopulationAdded -= UpdatePopulation;
+        PopulationManager.onTickerPopulationAdded -= UpdatePopulation;
 
         MoodManager.onMoodChange -= UpdateMood;
         GeneratePower.onPowerPlantPlaced -= UpdateMood;
