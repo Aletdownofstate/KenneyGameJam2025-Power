@@ -212,17 +212,23 @@ public class OptionsManager : MonoBehaviour
 
         if (PlayerPrefs.HasKey(MUSIC_VOLUME_KEY))
         {
-            musicVolumeSlider.value = PlayerPrefs.GetInt(MUSIC_VOLUME_KEY);
+            int volume = PlayerPrefs.GetInt(MUSIC_VOLUME_KEY);
+            musicVolumeSlider.value = volume;
+            mixer.SetFloat("musicVolume", volume);
         }
 
         if (PlayerPrefs.HasKey(SFX_VOLUME_KEY))
         {
-            sfxVolumeSlider.value = PlayerPrefs.GetInt(SFX_VOLUME_KEY);
+            int volume = PlayerPrefs.GetInt(SFX_VOLUME_KEY);
+            sfxVolumeSlider.value = volume;
+            mixer.SetFloat("sfxVolume", volume);
         }
 
         if (PlayerPrefs.HasKey(UI_VOLUME_KEY))
         {
-            uiVolumeslider.value = PlayerPrefs.GetInt(UI_VOLUME_KEY);
+            int volume = PlayerPrefs.GetInt(UI_VOLUME_KEY);
+            uiVolumeslider.value = volume;
+            mixer.SetFloat("uiVolume", volume);
         }
 
         Debug.Log("Options loaded");
