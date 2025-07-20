@@ -11,6 +11,7 @@ public class AudioManager : MonoBehaviour
     [Header("Audio Sources")]
     [SerializeField] private AudioSource sfxAudioSrc;
     [SerializeField] private AudioSource bgmAudioSrc;
+    [SerializeField] private AudioSource gameOverAudioSrc;
 
     [Header("Audio Clips")]
     [SerializeField] private AudioClip zapSfx;
@@ -20,6 +21,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip cashSfx;
     [SerializeField] private AudioClip popUpSfx;
     [SerializeField] private AudioClip trashSfx;
+    [SerializeField] private AudioClip booingSfx;
 
     private int cutOffFrequency = 200;
 
@@ -52,6 +54,8 @@ public class AudioManager : MonoBehaviour
         OnLandfillPlacement.onLandfillPlaced += OnLandfillPlaced;
 
         PopUpManager.onPopUp += PopUpOpened;
+
+        MoodManager.onGameOver += OnGameOver;
     }
 
     private void OnDisable()
@@ -66,6 +70,8 @@ public class AudioManager : MonoBehaviour
         OnLandfillPlacement.onLandfillPlaced -= OnLandfillPlaced;
 
         PopUpManager.onPopUp -= PopUpOpened;
+
+        MoodManager.onGameOver -= OnGameOver;
     }
 
     private void OnBuildingPlaced()
@@ -116,5 +122,12 @@ public class AudioManager : MonoBehaviour
     public void BypassLowPassFilter()
     {
         mainMixer.SetFloat("musicLpf", 22000);
+    }
+
+    private void OnGameOver()
+    {
+        bgmAudioSrc.Stop();
+        gameOverAudioSrc.Play();
+        PlaySfx(booingSfx);
     }
 }

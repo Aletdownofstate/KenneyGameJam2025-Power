@@ -23,6 +23,7 @@ public class PlacementSystem : MonoBehaviour
     private GameObject previewObject;
     private int selectedApartmentVariant = -1;
     private int selectedHouseVariant = -1;
+    private int selectedShopVariant = -1;
 
     public static event Action onBuildingPlaced, onEscPressed, onPowerPlantPlaced;
 
@@ -137,24 +138,33 @@ public class PlacementSystem : MonoBehaviour
             selectedHouseVariant = houseRandomiser.GetRandomVariant();
             houseRandomiser.SetVariant(selectedHouseVariant);
         }
+
+        var shopRandomiser = previewObject.GetComponent<GetRandomShop>();
+        if (shopRandomiser != null)
+        {
+            selectedShopVariant = shopRandomiser.GetRandomVariant();
+            shopRandomiser.SetVariant(selectedShopVariant);
+        }
     }
 
     private void GetPlacedBuildingVariant(GameObject newObject)
     {
-        // Randomise the building variant if the preview building is an apartment
-
         var apartmentRandomiser = newObject.GetComponent<GetRandomApartment>();
         if (apartmentRandomiser != null && selectedApartmentVariant >= 0)
         {
             apartmentRandomiser.SetVariant(selectedApartmentVariant);
         }
 
-        // Randomise the building variant if the preview building is an apartment
-
         var houseRandomiser = newObject.GetComponent<GetRandomHouse>();
         if (houseRandomiser != null && selectedHouseVariant >= 0)
         {
             houseRandomiser.SetVariant(selectedHouseVariant);
+        }
+
+        var shopRandomiser = newObject.GetComponent<GetRandomShop>();
+        if (shopRandomiser != null)
+        {
+            shopRandomiser.SetVariant(selectedShopVariant);
         }
     }
 
